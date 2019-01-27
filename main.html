@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Main Window</title>
+</head>
+<body>
+  <h1>Yooooooo</h1>
+  <ul></ul>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+    const list = document.querySelector('ul');
+    ipcRenderer.on('todo:add', (event, todo) => {
+      const li = document.createElement('li');
+      const text = document.createTextNode(todo);
+      li.appendChild(text);
+      list.appendChild(li);
+    });
+    ipcRenderer.on('todo:clear', () => {
+      list.innerHTML = '';
+    });
+  </script>
+</body>
+</html>
